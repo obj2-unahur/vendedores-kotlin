@@ -10,11 +10,9 @@ class VendedorTest : DescribeSpec({
   val sanIgnacio = Ciudad(misiones)
   val obera = Ciudad(misiones)
   val villaDolores = Ciudad(cordoba)
-  val vendedorFijo = VendedorFijo(obera)
-  val viajante =
-    Viajante(listOf(misiones))
 
   describe("Vendedor fijo") {
+    val vendedorFijo = VendedorFijo(obera)
     describe("puedeTrabajarEn") {
       it("su ciudad de origen") {
         vendedorFijo.puedeTrabajarEn(obera).shouldBeTrue()
@@ -26,12 +24,22 @@ class VendedorTest : DescribeSpec({
   }
 
   describe("Viajante") {
+    val viajante = Viajante(listOf(misiones))
     describe("puedeTrabajarEn") {
       it("una ciudad que pertenece a una provincia habilitada") {
         viajante.puedeTrabajarEn(sanIgnacio).shouldBeTrue()
       }
       it("una ciudad que no pertenece a una provincia habilitada") {
         viajante.puedeTrabajarEn(villaDolores).shouldBeFalse()
+      }
+    }
+  }
+
+  describe("Comercio corresponsal") {
+    val comercio = ComercioCorresponsal(listOf(obera, villaDolores))
+    describe("puedeTrabajarEn") {
+      it("una ciudad que tiene sucursal") {
+        comercio.puedeTrabajarEn(sanIgnacio).shouldBeTrue()
       }
     }
   }
