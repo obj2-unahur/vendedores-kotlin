@@ -11,7 +11,7 @@ abstract class Vendedor {
   fun esVersatil() =
     certificaciones.size >= 3
       && certificaciones.count { it.esDeProducto } >= 1
-      && certificaciones.count { it.esDeProducto } >= 1
+      && certificaciones.count { !it.esDeProducto } >= 1
 
   // Si el tipo no está declarado y la función no devuelve nada, se asume Unit (es decir, vacío)
   fun agregarCertificacion(certificacion: Certificacion) {
