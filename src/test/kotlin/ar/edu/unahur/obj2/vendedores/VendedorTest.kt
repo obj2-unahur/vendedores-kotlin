@@ -11,8 +11,7 @@ class VendedorTest : DescribeSpec({
   val obera = Ciudad(misiones)
   val villaDolores = Ciudad(cordoba)
   val vendedorFijo = VendedorFijo(obera)
-  val viajante =
-    Viajante(listOf(misiones))
+  val viajante = Viajante(listOf(misiones))
 
   describe("Vendedor fijo") {
     describe("puedeTrabajarEn") {
