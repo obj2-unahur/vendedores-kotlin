@@ -10,15 +10,20 @@ abstract class Vendedor {
   // En las funciones declaradas con = no es necesario explicitar el tipo
   fun esVersatil() =
     certificaciones.size >= 3
-      && certificaciones.count { it.esDeProducto } >= 1
-      && certificaciones.count { !it.esDeProducto } >= 1
+      && this.certificacionesDeProducto() >= 1
+      && this.otrasCertificaciones() >= 1
 
   // Si el tipo no está declarado y la función no devuelve nada, se asume Unit (es decir, vacío)
   fun agregarCertificacion(certificacion: Certificacion) {
     certificaciones.add(certificacion)
   }
 
-  fun esFirme() = certificaciones.sumBy { c -> c.puntaje } >= 30
+  fun esFirme() = this.puntajeCertificaciones() >= 30
+
+  fun certificacionesDeProducto() = certificaciones.count { it.esDeProducto }
+  fun otrasCertificaciones() = certificaciones.count { !it.esDeProducto }
+
+  fun puntajeCertificaciones() = certificaciones.sumBy { c -> c.puntaje }
 }
 
 // En los parámetros, es obligatorio poner el tipo

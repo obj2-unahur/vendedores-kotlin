@@ -6,14 +6,12 @@ import io.kotest.matchers.booleans.shouldBeTrue
 
 class VendedorTest : DescribeSpec({
   val misiones = Provincia(1300000)
-  val cordoba = Provincia(2000000)
   val sanIgnacio = Ciudad(misiones)
-  val obera = Ciudad(misiones)
-  val villaDolores = Ciudad(cordoba)
-  val vendedorFijo = VendedorFijo(obera)
-  val viajante = Viajante(listOf(misiones))
 
   describe("Vendedor fijo") {
+    val obera = Ciudad(misiones)
+    val vendedorFijo = VendedorFijo(obera)
+
     describe("puedeTrabajarEn") {
       it("su ciudad de origen") {
         vendedorFijo.puedeTrabajarEn(obera).shouldBeTrue()
@@ -25,6 +23,10 @@ class VendedorTest : DescribeSpec({
   }
 
   describe("Viajante") {
+    val cordoba = Provincia(2000000)
+    val villaDolores = Ciudad(cordoba)
+    val viajante = Viajante(listOf(misiones))
+
     describe("puedeTrabajarEn") {
       it("una ciudad que pertenece a una provincia habilitada") {
         viajante.puedeTrabajarEn(sanIgnacio).shouldBeTrue()
