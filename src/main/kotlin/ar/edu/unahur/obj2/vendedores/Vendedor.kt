@@ -7,6 +7,10 @@ abstract class Vendedor {
   // Además, a una MutableList se le pueden agregar elementos
   val certificaciones = mutableListOf<Certificacion>()
 
+  // Definimos el método abstracto.
+  // Como no vamos a implementarlo acá, es necesario explicitar qué devuelve.
+  abstract fun puedeTrabajarEn(ciudad: Ciudad): Boolean
+
   // En las funciones declaradas con = no es necesario explicitar el tipo
   fun esVersatil() =
     certificaciones.size >= 3
@@ -28,20 +32,20 @@ abstract class Vendedor {
 
 // En los parámetros, es obligatorio poner el tipo
 class VendedorFijo(val ciudadOrigen: Ciudad) : Vendedor() {
-  fun puedeTrabajarEn(ciudad: Ciudad): Boolean {
+  override fun puedeTrabajarEn(ciudad: Ciudad): Boolean {
     return ciudad == ciudadOrigen
   }
 }
 
 // A este tipo de List no se le pueden agregar elementos una vez definida
 class Viajante(val provinciasHabilitadas: List<Provincia>) : Vendedor() {
-  fun puedeTrabajarEn(ciudad: Ciudad): Boolean {
+  override fun puedeTrabajarEn(ciudad: Ciudad): Boolean {
     return provinciasHabilitadas.contains(ciudad.provincia)
   }
 }
 
 class ComercioCorresponsal(val ciudades: List<Ciudad>) : Vendedor() {
-  fun puedeTrabajarEn(ciudad: Ciudad): Boolean {
+  override fun puedeTrabajarEn(ciudad: Ciudad): Boolean {
     return ciudades.contains(ciudad)
   }
 }
