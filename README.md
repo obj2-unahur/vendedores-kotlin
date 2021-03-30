@@ -6,14 +6,21 @@ Como el objetivo es familiarizarse con Kotlin, vale _inspirarse_ de la versión 
 
 Se pide resolver el enunciado que está a continuación, incluyendo los tests (como salgan). Les dejamos una pequeña parte resuelta para que no les sea tan complicado familiarizarse con Kotlin. 
 
-## Enunciado
+## Antes de empezar: algunos consejos
+
+El enunciado tiene **mucha** información, van a necesitar leerlo varias veces. La sugerencia es que lo lean entero una vez (para tener una idea general) y luego vuelvan a consultarlo las veces que hagan falta.
+
+Concentrensé en los requerimientos y, excepto que se traben mucho, respeten el orden sugerido. No es necesario que hagan TDD, pero sí sería interesante que vayan creando las distintas clases y métodos a medida que resuelven cada requerimiento y no antes. 
+
+En otras palabras: trabajen completando cada requerimiento antes de pasar al siguiente, con los tests que aseguran que funciona incluidos. Si al avanzar en los requerimientos les parece necesario refactorizar, adelante, van a tener los tests que garantizan que no rompieron nada. :smirk: 
+
+## Descripción del dominio
 
 López y López es una empresa de distribución de productos de consumo masivo, que se distribuyen en ciudades repartidas por toda la geografía nacional. 
 
 Su organización está basada en **centros de distribución**. Cada centro trabaja con distintos **vendedores**.
 
 Se nos pide desarrollar un modelo de los centros, los vendedores, y la relación entre ellos.
-
 
 ### Vendedores
 López y López recluta vendedores de tres tipos:
@@ -25,14 +32,6 @@ De cada ciudad debemos registrar en qué provincia está, y de cada provincia, l
 
 De cada vendedor, se tiene detalle de las **certificaciones** que posee.
 Cada certificación otorga una cantidad de _puntos_. Algunas certificaciones son sobre productos, otras no. 
-
-Desarrollar un modelo de vendedores que permita consultar:
-- dada una ciudad, si un vendedor _puede trabajar_ en esa ciudad. La condición depende del tipo de vendedor, como se indica a continuación
-	- _vendedor fijo_: debe ser la ciudad en la que vive.
-	- _viajante_: la ciudad debe estar en una provincia en la que está habilitado.
-	- _comercio corresponsal_: debe ser una ciudad en la que tiene sucursal.
-- si un vendedor _es versátil_. Las condiciones son: que tenga al menos tres certificaciones, que tenga al menos una sobre productos, y al menos una que no sea sobre productos.
-- si un vendedor _es firme_. La condición es que el puntaje total que le otorgan sus certificaciones sea mayor o igual a 30.
 
 ### Vendedor influyente
 Agregar al modelo la capacidad de indicar si un vendedor _es influyente_. La condición depende del tipo de vendedor:
@@ -50,8 +49,29 @@ Agregar al modelo los **centros de distribución**, de cada uno se sabe en qué 
 
 Debe poder _agregarse_ un vendedor a un centro. Si el vendedor ya está registrado para el centro, debe generarse un error.
 
+## Requerimientos
+
+Desarrollar un modelo de vendedores que permita consultar:
+- dada una ciudad, si un vendedor _puede trabajar_ en esa ciudad. La condición depende del tipo de vendedor, como se indica a continuación
+	- _vendedor fijo_: debe ser la ciudad en la que vive.
+	- _viajante_: la ciudad debe estar en una provincia en la que está habilitado.
+	- _comercio corresponsal_: debe ser una ciudad en la que tiene sucursal.
+- si un vendedor _es versátil_. Las condiciones son: que tenga al menos tres certificaciones, que tenga al menos una sobre productos, y al menos una que no sea sobre productos.
+- si un vendedor _es firme_. La condición es que el puntaje total que le otorgan sus certificaciones sea mayor o igual a 30.
+
 Debe poder consultarse, para un centro de distribución:
 - el _vendedor estrella_, que es el que tiene mayor puntaje total por certificaciones.
 - si _puede cubrir_, o no, una ciudad dada. La condición es que al menos uno de los vendedores registrados pueda trabajar en esa ciudad.
 - la colección de _vendedores genéricos_ registrados. Un vendedor se considera genérico si tiene al menos una certificación que no es de productos.
 - si _es robusto_, la condición es que al menos 3 de sus vendedores registrados sea firme.
+
+## Créditos
+
+Enunciado original creado por Carlos Lombardi y Leonardo Gassman para UNQ. Transformado a Markdown, reformateado, reorganizado el texto y agregados nuevos requerimientos por Federico Aloi para UNaHur.
+
+[![CC BY-SA 4.0][cc-by-sa-image]][cc-by-sa]
+
+Esta obra está bajo una [Licencia Creative Commons Atribución-CompartirIgual 4.0 Internacional][cc-by-sa].
+
+[cc-by-sa]: https://creativecommons.org/licenses/by-sa/4.0/deed.es
+[cc-by-sa-image]: https://licensebuttons.net/l/by-sa/4.0/88x31.png
